@@ -23,6 +23,7 @@
     "default_title": "QRify",
     "default_popup": "src/page_action/page_action.html"
   },
+  "web_accessible_resources": ["js/qr.js","js/qr-code.js"],
   "permissions": [
     "contextMenus",
     "notifications",

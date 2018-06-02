@@ -32,23 +32,29 @@ function HandleViewQR(info, tab) {
   // console.log("item " + info.menuItemId + " was clicked");
   let qrInput = "";
   if("selectionText" in info)
-  qrInput = info["selectionText"].substr(0,200);
+  qrInput = info["selectionText"].substr(0,500);
   if("linkUrl" in info)
   qrInput = info["linkUrl"];
   console.log(info, qrInput);
-  chrome.pageAction.show("sender.tab.id");
-  // console.log("tab: " + JSON.stringify(tab));
+  
   chrome.storage.sync.set({data: qrInput}, function(e) {
     console.log(e)
+  });
+
+  chrome.tabs.executeScript({
+    file: '/inject/inject.js'
   });
 }
 
 function HandleViewQRForPageURL(info, tab) {
   console.log(info, info["pageUrl"]);
-  // console.log("tab: " + JSON.stringify(tab));
   
   chrome.storage.sync.set({data: info["pageUrl"]}, function(e) {
     console.log(e)
+  });
+  
+  chrome.tabs.executeScript({
+    file: '/inject/inject.js'
   });
 }
   
