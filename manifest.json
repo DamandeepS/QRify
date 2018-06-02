@@ -2,8 +2,8 @@
   "name": "QRify",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension allows you to create QR code for any text, Enabling sharing URL/Text to other devices",
-  "homepage_url": "http://damandeepsingh.com",
+  "description": "This extension allows you to create QR code for selected link/text, Enabling sharing URL/Text to other devices",
+  "homepage_url": "https://github.com/DamandeepS/QRify",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -26,10 +26,8 @@
   "web_accessible_resources": ["js/qr.js","js/qr-code.js"],
   "permissions": [
     "contextMenus",
-    "notifications",
     "declarativeContent",
     "storage",
-    "activeTab",
-    "tabs"
+    "activeTab"
   ]
 }

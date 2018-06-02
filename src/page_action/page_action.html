@@ -6,10 +6,15 @@
 				padding: 10px;
 				height: 200px;
 				width: 400px;
-				font-family: Helvetica, Ubuntu, Arial, sans-serif;
+				text-align: center;
+            	font-family: Segoe UI, Lucida Grande, Arial, Verdana;
 			}
-			h1 {
-				font-size: 2em;
+
+			#label {				
+				display: block;
+				padding-bottom: 20px;
+				color: #545454;
+				text-align: 18px;
 			}
 		</style>
 		<script src="/js/qr.js"></script>
@@ -17,12 +22,10 @@
 	</head>
 	<body>
 		<div id="mainPopup">
-			<h1>Hello There</h1>
 			<p>Select any text/link and right-click to generate QR.</p>
 			<qr-code id="qrCode"></qr-code>
 			<label id="label"></label>
 		</div>
-
 		<script src="./script.js"></script>
 	</body>
 </html>
