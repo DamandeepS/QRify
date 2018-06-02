@@ -35,7 +35,7 @@ chrome.storage.sync.get('data', function(data) {
             background: #fff;
             padding: 30px;
             border: 1px solid #3f00ff;
-            box-shadow: 0 0 21px -5px #1e1e1e;
+            box-shadow: 0 4px 15px -5px #1e1e1e;
         }
 
         .` + stylePrefix + `_wrapper:focus {
