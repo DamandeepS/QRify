@@ -26,6 +26,7 @@ chrome.storage.sync.get('data', function(data) {
             text-align: center;
             top: 50%;
             left: 50%;
+            transition: 0.3s linear all;
             display: inline-block;
             z-index: 1199;
             min-width: 200px;
@@ -35,6 +36,13 @@ chrome.storage.sync.get('data', function(data) {
             padding: 30px;
             border: 1px solid #3f00ff;
             box-shadow: 0 0 21px -5px #1e1e1e;
+        }
+
+        .` + stylePrefix + `_wrapper:focus {
+            outline: none;
+            /*box-shadow: 0 12px 44px -14px #1e1e1e;*/
+            box-shadow:0 12px 38px -12px #1e1e1e;
+
         }
         #` + stylePrefix + `_label {
             font-family: Segoe UI, Lucida Grande, Arial, Verdana;
@@ -72,6 +80,7 @@ chrome.storage.sync.get('data', function(data) {
         /** add structure */
         const wrapper  = document.createElement("div");
         wrapper.classList.add(stylePrefix + '_wrapper');
+        wrapper.tabIndex=1;
         const wrapperContent = `
             <a id="` + stylePrefix +`_close" href="#">X</a>
             <qr-code data="` + lbl + `" id="` + stylePrefix +`_qrcode"></qr-code>
@@ -82,15 +91,23 @@ chrome.storage.sync.get('data', function(data) {
 
         /** Add event listeners */
         document.getElementById( stylePrefix + '_close').addEventListener('click', e => {
-            document.querySelector('.' + stylePrefix +  '_wrapper').style.display = "none";
+            wrapper.style.display = "none";
             e.preventDefault();
             e.stopPropagation();
+        });
+        wrapper.addEventListener('keydown', e=> {
+            if(e.keyCode==27)
+                wrapper.style.display="none";
         })
-        document.body.setAttribute('qr-extension-ready', "yes")
+        document.body.setAttribute('qr-extension-ready', "yes");
+        
+        wrapper.focus();
     } else {
         document.querySelector('#' + stylePrefix +  '_qrcode').setAttribute("data", lbl);
         document.querySelector('#' + stylePrefix +  '_label').innerHTML = lbl;
-        document.querySelector('.' + stylePrefix +  '_wrapper').style.display = "inline-block";
+        let wrapper = document.querySelector('.' + stylePrefix +  '_wrapper');
+        wrapper.style.display = "inline-block";
+        wrapper.focus();
     }
     
 });
