@@ -8,7 +8,7 @@ This google chrome extension enable user to generate QR code for any selected te
 QRcode webcomponent - [https://github.com/educastellano/qr-code](https://github.com/educastellano/qr-code)
 
 ## Limitations
-Currently maximum character are capped at 500, as most mobile QR scanner really struggle to read complex QR from lower PPI screen.
+Currently maximum characters for Text Selection are capped at 500 and for links that limit is 600, as most mobile QR scanner really struggle to read complex QR from lower PPI screen.
 
 ## How to Use
 #### This extension is **NOT** yet published to Chrome Webstore.
@@ -24,7 +24,8 @@ Currently maximum character are capped at 500, as most mobile QR scanner really 
 ### Note
 Chrome might ask you to disable the Extension on next session as it using **Developer Mode**.
 
-### Screen capture
 
+
+### Demo
 ![Demo](QRify-demo-gh.gif)
 

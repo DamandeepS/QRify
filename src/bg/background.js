@@ -22,9 +22,18 @@ chrome.extension.onMessage.addListener(
 function HandleViewQR(info, tab) {
   let qrInput = "";
   if("selectionText" in info)
-  qrInput = info["selectionText"].substr(0,500);
-  if("linkUrl" in info)
-  qrInput = info["linkUrl"];
+    qrInput = info["selectionText"].substr(0,500);
+  if("linkUrl" in info) {
+    qrInput = info["linkUrl"];
+    while(qrInput.length>600) {
+      var deepCopy = (' ' + qrInput).slice(1);
+      var lastIndex = qrInput.lastIndexOf("/");
+      if(lastIndex>0)
+      qrInput = qrInput.substr(0,lastIndex)
+      if(deepCopy==qrInput)
+        break;
+    }
+  }
   chrome.storage.sync.set({data: qrInput}, function(e) {
   });
 
