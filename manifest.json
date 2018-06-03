@@ -28,6 +28,7 @@
     "contextMenus",
     "declarativeContent",
     "storage",
-    "activeTab"
+    "activeTab",
+    "tabs"
   ]
 }

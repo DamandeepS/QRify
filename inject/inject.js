@@ -50,6 +50,8 @@ chrome.storage.sync.get('data', function(data) {
             display: block;
             word-wrap: break-word;
             word-break: break-all;
+            color: #673AB7;
+            font-weight: 400;
         }
         #` + stylePrefix + `_close {
             position: absolute;

@@ -6,7 +6,6 @@ chrome.extension.onMessage.addListener(
 
   chrome.runtime.onInstalled.addListener(function() {
     chrome.storage.sync.set({data: ''}, function(e) {
-      console.log(e)
     });
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
@@ -26,10 +25,7 @@ function HandleViewQR(info, tab) {
   qrInput = info["selectionText"].substr(0,500);
   if("linkUrl" in info)
   qrInput = info["linkUrl"];
-  console.log(info, qrInput);
-  
   chrome.storage.sync.set({data: qrInput}, function(e) {
-    console.log(e)
   });
 
   chrome.tabs.executeScript({
@@ -37,10 +33,8 @@ function HandleViewQR(info, tab) {
   });
 }
 
-function HandleViewQRForPageURL(info, tab) {
-  console.log(info, info["pageUrl"]);
-  
-  chrome.storage.sync.set({data: info["pageUrl"]}, function(e) {
+function HandleViewQRForPageURL(info, tab) {  
+  chrome.storage.sync.set({data: tab["url"]}, function(e) {
   });
   
   chrome.tabs.executeScript({
