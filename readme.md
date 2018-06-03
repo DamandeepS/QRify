@@ -22,7 +22,7 @@ Currently maximum characters for Text Selection are capped at 500 and for links 
     
    
 ### Note
-Chrome might ask you to disable the Extension on next session as it using **Developer Mode**.
+Chrome might ask you to disable the Extension on next session as this is using **Developer Mode**.
 
 
 
