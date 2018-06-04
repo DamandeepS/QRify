@@ -7,7 +7,16 @@ chrome.tabs.getSelected(null,function(tab) {
 });
 
 input.addEventListener('keyup', e => {
-  qrCode.data = input.value;
-  if(e.keyCode==13 && input.rows<5)
-    input.rows++;
+  syncInputWithQRcode();
 })
+
+input.addEventListener('input', e=> {
+  syncInputWithQRcode();
+})
+
+function syncInputWithQRcode() {
+    var text = input.value.substring(0,500) || "";
+    qrCode.data = text;
+    input.value = text;
+    input.rows = (Math.floor(text.length/35) > 6) ? 6 : Math.floor(text.length/35);
+}
