@@ -10,7 +10,7 @@ chrome.extension.onMessage.addListener(
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
         conditions: [new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: {hostEquals: 'developer.chrome.com'},
+
         })
         ],
             actions: [new chrome.declarativeContent.ShowPageAction()]
@@ -42,15 +42,15 @@ function HandleViewQR(info, tab) {
   });
 }
 
-function HandleViewQRForPageURL(info, tab) {  
+function HandleViewQRForPageURL(info, tab) {
   chrome.storage.sync.set({data: tab["url"]}, function(e) {
   });
-  
+
   chrome.tabs.executeScript({
     file: '/inject/inject.js'
   });
 }
-  
+
 
 chrome.contextMenus.create({"title":"View QR for Selected link/text", "contexts": ["selection", "link"],  "onclick":  HandleViewQR});
-chrome.contextMenus.create({"title":"View QR for Page URL", "contexts": ["all"],  "onclick":  HandleViewQRForPageURL});
+chrome.contextMenus.create({"title":"View QR for Page URL", "contexts": ["page", "frame", "selection", "link", "editable", "image", "video"],  "onclick":  HandleViewQRForPageURL});

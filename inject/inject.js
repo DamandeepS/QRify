@@ -102,7 +102,7 @@ chrome.storage.sync.get('data', function(data) {
                 wrapper.style.display="none";
         })
         document.body.setAttribute('qr-extension-ready', "yes");
-        
+
         wrapper.focus();
     } else {
         document.querySelector('#' + stylePrefix +  '_qrcode').setAttribute("data", lbl);
@@ -111,5 +111,8 @@ chrome.storage.sync.get('data', function(data) {
         wrapper.style.display = "inline-block";
         wrapper.focus();
     }
-    
+
+
+      chrome.browserAction.setPopup({popup:  "<html><head></head><body>Daman</body></html>"})
+
 });

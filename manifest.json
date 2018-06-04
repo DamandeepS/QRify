@@ -21,14 +21,14 @@
       "128": "icons/icon128.png"
     },
     "default_title": "QRify",
-    "default_popup": "src/page_action/page_action.html"
+    "default_popup": "./src/page_action/page_action.html"
   },
-  "web_accessible_resources": ["js/qr.js","js/qr-code.js"],
+  "web_accessible_resources": ["js/qr.js","js/qr-code.js","src/page_action/page_action.html"],
   "permissions": [
     "contextMenus",
-    "declarativeContent",
     "storage",
     "activeTab",
-    "tabs"
+    "tabs",
+    "declarativeContent"
   ]
 }

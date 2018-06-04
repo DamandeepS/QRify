@@ -1,20 +1,107 @@
 <!doctype html>
 <html>
-	<head>	
+	<head>
 		<style type="text/css">
 			#mainPopup {
 				padding: 10px;
 				height: 200px;
 				width: 400px;
 				text-align: center;
-            	font-family: Segoe UI, Lucida Grande, Arial, Verdana;
+        font-family: Segoe UI, Lucida Grande, Arial, Verdana;
+			}
+			.group {
+			  position:relative;
+			  margin-bottom:45px;
+				margin-top: 30px;
+				display: inline-block;
 			}
 
-			#label {				
-				display: block;
-				padding-bottom: 20px;
-				color: #545454;
-				text-align: 18px;
+			#input {
+			  font-size: 14px;
+				line-height: 18px;
+			  padding:10px 10px 10px 5px;
+			  display:block;
+			  width:300px !important;
+				max-width: 300px;
+				box-sizing: border-box;
+			  border:none;
+			  border-bottom:1px solid #757575;
+			}
+
+			label {
+			  color:#999;
+			  font-size:14px;
+			  font-weight:normal;
+			  position:absolute;
+			  pointer-events:none;
+			  left:5px;
+			  top:10px;
+			  transition:0.2s ease all;
+			  -moz-transition:0.2s ease all;
+			  -webkit-transition:0.2s ease all;
+			}
+
+			/* active state */
+			#input:focus ~ label, #input:valid ~ label 		{
+			  top:-15px;
+			  font-size:12px;
+			  color:#5264AE;
+			}
+
+			#input:focus ~ label, #input:valid ~ label 		{
+			  top:-20px;
+			  font-size:12px;
+			  color:#5264AE;
+			}
+
+			#input:focus { outline:none; }
+
+			.bar 	{ position:relative; display:block; width:300px; }
+
+			.bar:before, .bar:after 	{
+			  content:'';
+			  height:2px;
+			  width:0;
+			  bottom:1px;
+			  position:absolute;
+			  background:#5264AE;
+			  transition:0.2s ease all;
+			  -moz-transition:0.2s ease all;
+			  -webkit-transition:0.2s ease all;
+			}
+			.bar:before {
+			  left:50%;
+			}
+			.bar:after {
+			  right:50%;
+			}
+
+			/* active state */
+			#input:focus ~ .bar:before, #input:focus ~ .bar:after {
+			  width:50%;
+			}
+
+			/* HIGHLIGHTER ================================== */
+			.highlight {
+			  position:absolute;
+			  height:60%;
+			  width:100px;
+			  top:25%;
+			  left:0;
+			  pointer-events:none;
+			  opacity:0.5;
+			}
+
+			/* active state */
+			#input:focus ~ .highlight {
+			  -webkit-animation:inputHighlighter 0.3s ease;
+			  -moz-animation:inputHighlighter 0.3s ease;
+			  animation:inputHighlighter 0.3s ease;
+			}
+
+			@keyframes inputHighlighter {
+				from { background:#5264AE; }
+			  to 	{ width:0; background:transparent; }
 			}
 		</style>
 		<script src="/js/qr.js"></script>
@@ -24,9 +111,13 @@
 		<div id="mainPopup">
 			<p>Select any text/link and right-click to generate QR.</p>
 			<qr-code id="qrCode"></qr-code>
-			<label id="label"></label>
+			<div class="group">
+	      <textarea type="text" id="input" rows="1" required></textarea>
+	      <span class="highlight"></span>
+	      <span class="bar"></span>
+	      <label>QR input</label>
+	    </div>
 		</div>
 		<script src="./script.js"></script>
 	</body>
 </html>
-
