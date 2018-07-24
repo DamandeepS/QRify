@@ -2,7 +2,6 @@
 var url = chrome.extension.getURL ("src/page_action/page_action.html");
 var lbl = "";
 
-console.log(url)
 var stylePrefix = new URL(url).hostname;
 chrome.storage.sync.get('data', function(data) {
     lbl = data.data;
@@ -10,7 +9,7 @@ chrome.storage.sync.get('data', function(data) {
     {
 
         /** Adding Head scripts */
-        const scripts = ['/js/qr.js','/js/qr-code.js'];
+        const scripts = ['/js/qr-code.js'];
         for(let scr of scripts) {
             const scrUrl = chrome.extension.getURL (scr);
             const scrElem = document.createElement("script");
@@ -28,7 +27,7 @@ chrome.storage.sync.get('data', function(data) {
             left: 50%;
             transition: 0.3s linear all;
             display: inline-block;
-            z-index: 1199;
+            z-index: 91199;
             min-width: 200px;
             transform: translate(-50%, -50%);
             min-height: 100px;
@@ -85,7 +84,7 @@ chrome.storage.sync.get('data', function(data) {
         wrapper.tabIndex=1;
         const wrapperContent = `
             <a id="` + stylePrefix +`_close" href="#">X</a>
-            <qr-code data="` + lbl + `" id="` + stylePrefix +`_qrcode"></qr-code>
+            <qr-code data="` + lbl + `" id="` + stylePrefix +`_qrcode" format="svg"></qr-code>
             <label id="` + stylePrefix +`_label">` + lbl +`</label>`;
         wrapper.innerHTML = wrapperContent;
         document.body.insertBefore (wrapper, document.body.firstChild);
@@ -111,8 +110,5 @@ chrome.storage.sync.get('data', function(data) {
         wrapper.style.display = "inline-block";
         wrapper.focus();
     }
-
-
-      chrome.browserAction.setPopup({popup:  "<html><head></head><body>Daman</body></html>"})
 
 });
