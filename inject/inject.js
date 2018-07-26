@@ -63,7 +63,7 @@ chrome.storage.sync.get('data', function(data) {
             line-height: 30px;
             background: #3f00ff;
             text-align: center;
-            color: #fff;
+            color: #fff !important;
             font-size: 18px;
             border-radius: 1px;
         }
