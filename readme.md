@@ -13,7 +13,7 @@ Currently maximum characters for Text Selection are capped at 500 and for links 
 ## How to Use
 #### This extension is **NOT** yet published to Chrome Webstore.
 
-   - Download and extract the [release zip](https://github.com/DamandeepS/QRify/archive/v0.1.4.zip).
+   - Download and extract the [release zip](https://github.com/DamandeepS/QRify/archive/v0.1.5.zip).
    - Go to Chrome Extensions Page.
    - Enable Developer mode.
    - Select Load Unpacked --> Select the directory where you extracted the zip.
