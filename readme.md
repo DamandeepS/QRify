@@ -11,9 +11,10 @@ QRcode webcomponent - [https://github.com/educastellano/qr-code](https://github.
 Currently maximum characters for Text Selection are capped at 500 and for links that limit is 600, as most mobile QR scanner really struggle to read complex QR from lower PPI screen.
 
 ## How to Use
-#### This extension is **NOT** yet published to Chrome Webstore.
+### This extension is now published to Chrome Webstore - [link](https://chrome.google.com/webstore/detail/qrify/nnokneneaanlmkpcibflacfhhneijagl).
 
-   - Download and extract the [release zip](https://github.com/DamandeepS/QRify/archive/v0.1.6.zip).
+#### Alternatively you can add it via **Developer Mode**:
+   - Download and extract the [release zip](https://github.com/DamandeepS/QRify/archive/v0.1.7.zip).
    - Go to Chrome Extensions Page.
    - Enable Developer mode.
    - Select Load Unpacked --> Select the directory where you extracted the zip.
