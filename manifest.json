@@ -34,5 +34,9 @@
     "clipboardRead"
   ],
   "offline_enabled": true,
-  "author": "Damandeep Singh <mail@damandeepsingh.com>"
+  "author": "Damandeep Singh <mail@damandeepsingh.com>",
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": false
+  }
 }

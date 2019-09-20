@@ -25,8 +25,15 @@ function syncInputWithQRcode() {
     var text = input.value.substring(0,1200) || "";
     qrCode.data = text;
     input.value = text;
-    input.rows = (Math.floor(text.length/35) > 6) ? 6 : Math.floor(text.length/35);
+    input.rows = Math.max((Math.floor(text.length/35) > 6) ? 6 : Math.floor(text.length/35), input.rows);
 }
+
+chrome.storage.sync.get({
+  'darkMode': false
+}, function(items) {
+  if(items.darkMode)
+  document.body.setAttribute('data-theme', items.darkMode ? 'dark' : '');
+});
 
 
 input.focus();

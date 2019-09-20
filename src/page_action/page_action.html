@@ -48,6 +48,9 @@
 
 			qr-code {
 				margin-top: 10px;
+				display: inline-block;
+				--bg-color: #FFF;
+				--fg-color: #000
 			}
 			
 			.group {
@@ -153,10 +156,19 @@
 				padding: 0;
 				margin: 0;
 				border: none;
-				right: -10px
+				right: -10px;
+				cursor: pointer;
+				transition: all 0.2s linear 0s;
+				box-shadow: 0 0 6px -3px;
+				border-radius: 3px;
+				z-index: 99;
+				outline: 0.8px;
+				background-color: #fff;
 			}
-
-			#paste img {
+			#paste:hover, #paste:focus {
+				box-shadow: 0 2px 5px -1px;
+			}
+		#paste img {
 				height: 1.9em;
 				width: auto
 			}
@@ -217,6 +229,10 @@
 			body[data-theme="dark"] .bar:before, body[data-theme="dark"] .bar:after {
 				background: #fff;
 			}
+
+			body[data-theme="dark"] qr-code {
+				--bg-color: #7f7f7f;
+			}
 		</style>
 		<script src="/js/qr-code.js"></script>
 	</head>
@@ -225,10 +241,10 @@
 			<p class="help">Select any text/link and right-click to generate QR.</p>
 			<p class="or">or</p>
 			<p class="help">Enter text in textarea below, use paste button to paste from clipboard</p>
-			<qr-code id="qrCode"></qr-code>
+			<qr-code id="qrCode" format="svg"></qr-code>
 			<div class="group">
-		  <textarea maxlength="1200" type="text" autofocus id="input" rows="1" required></textarea>
-		  <button id="paste"><img src="../assets/paste.png"></button>
+		  <textarea maxlength="1200" type="text" autofocus id="input" rows="3" required></textarea>
+		  <button title="Paste text." id="paste"><img src="../assets/paste.png"></button>
 	      <span class="highlight"></span>
 	      <span class="bar"></span>
 	      <label>QR input</label>
