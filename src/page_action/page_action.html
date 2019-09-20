@@ -2,13 +2,54 @@
 <html>
 	<head>
 		<style type="text/css">
-			#mainPopup {
-				padding: 10px;
-				height: 200px;
-				width: 400px;
-				text-align: center;
-        font-family: Segoe UI, Lucida Grande, Arial, Verdana;
+			@font-face {
+				font-family: "seg";
+				src: url("../assets/segoeuisl.woff");
 			}
+			 body {
+				position: relative;
+			 }
+			#mainPopup {
+				padding: 30px 10px 10px 10px;
+				min-height: 200px;
+				min-width: 400px;
+				text-align: center;
+        		font-family: "seg", Segoe UI, Lucida Grande, Arial, Verdana;
+			}
+
+			p.help {
+				font-size: 1.1em;
+				user-select: none;
+				margin: 5px;
+			}
+
+			p.or {
+				margin: 0;
+				position: relative;
+				display: inline-block;
+			}
+
+			p.or::before, p.or::after {
+				content: "";
+				height: 1px;
+				background: #999;
+				width: 30vw;
+				position: absolute;
+    			top: calc(50% + 1px);
+			}
+
+			p.or::before {
+				right: 1em;
+			}
+
+			p.or::after {
+				left: 1em;
+			}
+
+			qr-code {
+				margin-top: 10px;
+			}
+			
 			.group {
 			  position:relative;
 			  margin-bottom:45px;
@@ -17,6 +58,7 @@
 			}
 
 			#input {
+				position: relative;
 			  font-size: 14px;
 				line-height: 18px;
 			  padding:10px 10px 10px 5px;
@@ -26,6 +68,7 @@
 				box-sizing: border-box;
 			  border:none;
 			  border-bottom:1px solid #757575;
+			  background: #f4f4f4;
 			}
 
 			label {
@@ -62,7 +105,7 @@
 			  content:'';
 			  height:2px;
 			  width:0;
-			  bottom:1px;
+			  bottom:0px;
 			  position:absolute;
 			  background:#5264AE;
 			  transition:0.2s ease all;
@@ -103,21 +146,95 @@
 				from { background:#5264AE; }
 			  to 	{ width:0; background:transparent; }
 			}
+
+			#paste {
+				position: absolute;
+				top: -4px;
+				padding: 0;
+				margin: 0;
+				border: none;
+				right: -10px
+			}
+
+			#paste img {
+				height: 1.9em;
+				width: auto
+			}
+			
+			body[data-theme="dark"] #paste {
+				filter: invert(1);
+			}
+
+			.copyright {
+			  display: inline-block;
+			  text-align: right;
+			  position: absolute;
+			  right: 0;
+			  bottom: 0;
+			  margin: 0;
+    		  font-style: italic;
+			  opacity: 0.6;
+			  transition: all 0.2s linear 0s;
+        	  font-family: "seg", Segoe UI, Lucida Grande, Arial, Verdana;
+			}
+			.copyright a {
+				color: #232323;
+				text-decoration: none;
+			}
+
+			.copyright:hover {
+				opacity: 1;
+			}
+
+
+			body[data-theme="dark"] {
+				background: #171717;
+			}
+
+			body[data-theme="dark"] .copyright a {
+				 color: #4e4949; 
+			}
+
+			body[data-theme="dark"] p{
+				color  : #bbacac;
+			}
+
+
+			label {
+				color  : #bbaca8;
+			}
+
+			body[data-theme="dark"] #input:focus ~ label, body[data-theme="dark"] #input:valid ~ label {
+				color: #fff;
+			}
+
+			body[data-theme="dark"] textarea#input {
+				background: #455;
+				color: #fffc;
+				border: none;
+			}
+
+			body[data-theme="dark"] .bar:before, body[data-theme="dark"] .bar:after {
+				background: #fff;
+			}
 		</style>
-		<script src="/js/qr.js"></script>
 		<script src="/js/qr-code.js"></script>
 	</head>
 	<body>
 		<div id="mainPopup">
-			<p>Select any text/link and right-click to generate QR.</p>
+			<p class="help">Select any text/link and right-click to generate QR.</p>
+			<p class="or">or</p>
+			<p class="help">Enter text in textarea below, use paste button to paste from clipboard</p>
 			<qr-code id="qrCode"></qr-code>
 			<div class="group">
-	      <textarea type="text" id="input" rows="1" required></textarea>
+		  <textarea maxlength="1200" type="text" autofocus id="input" rows="1" required></textarea>
+		  <button id="paste"><img src="../assets/paste.png"></button>
 	      <span class="highlight"></span>
 	      <span class="bar"></span>
 	      <label>QR input</label>
 	    </div>
 		</div>
+		<p class="copyright"><a title="mail@damandeepsingh.com" href="mailto:mail@damandeepsingh.com">&copy; mail@damandeepsingh.com</a></p>
 		<script src="./script.js"></script>
 	</body>
 </html>

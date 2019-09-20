@@ -1,5 +1,5 @@
 
-var url = chrome.extension.getURL ("src/page_action/page_action.html");
+var url = chrome.extension.getURL("src/page_action/page_action.html");
 var lbl = "";
 
 var stylePrefix = new URL(url).hostname;
@@ -14,20 +14,19 @@ chrome.storage.sync.get('data', function(data) {
             const scrUrl = chrome.extension.getURL (scr);
             const scrElem = document.createElement("script");
             scrElem.src = scrUrl;
-            console.log(scrUrl)
             document.head.append(scrElem);
         }
 
         /** Adding custom style node */
         const styleContent = `
-        .` + stylePrefix + `_wrapper {
+        .${stylePrefix}_wrapper {
             position: fixed;
             text-align: center;
             top: 50%;
             left: 50%;
             transition: 0.3s linear all;
             display: inline-block;
-            z-index: 91199;
+            z-index: ${Number.MAX_SAFE_INTEGER};
             min-width: 200px;
             transform: translate(-50%, -50%);
             min-height: 100px;
@@ -37,13 +36,12 @@ chrome.storage.sync.get('data', function(data) {
             box-shadow: 0 4px 15px -5px #1e1e1e;
         }
 
-        .` + stylePrefix + `_wrapper:focus {
+        .${stylePrefix}_wrapper:focus {
             outline: none;
-            /*box-shadow: 0 12px 44px -14px #1e1e1e;*/
             box-shadow:0 12px 38px -12px #1e1e1e;
 
         }
-        #` + stylePrefix + `_label {
+        #${stylePrefix}_label {
             font-family: Segoe UI, Lucida Grande, Arial, Verdana;
             font-size: 14px;
             display: block;
@@ -52,7 +50,7 @@ chrome.storage.sync.get('data', function(data) {
             color: #673AB7;
             font-weight: 400;
         }
-        #` + stylePrefix + `_close {
+        #${stylePrefix}_close {
             position: absolute;
             right: -1px;
             text-decoration: none;
@@ -68,11 +66,32 @@ chrome.storage.sync.get('data', function(data) {
             border-radius: 1px;
         }
 
-        #` + stylePrefix + `_qrcode {
+        #${stylePrefix}_qrcode {
             position: relative;
             font-family: Segoe UI, Lucida Grande, Arial, Verdana;
             z-index: 1200;
         }
+
+        .${stylePrefix}_copyright {
+            position: absolute;
+            right: 10px;
+            bottom: 0;
+            margin: 0;
+            font-size: 10px;
+            font-style: italic;
+            color: #232323;
+            font-family: "seg", Segoe UI, Lucida Grande, Arial, Verdana;
+          }
+          .${stylePrefix}_copyright a {
+              color: #ccc;
+              text-decoration: none;
+              font-size: 10px;
+              transition: color 0.2s linear 0s;
+          }
+          .${stylePrefix}_copyright:hover a {
+            color: #777;
+        }
+
         `
         const styleElem = document.createElement('style');
         styleElem.innerHTML = styleContent;
@@ -83,9 +102,12 @@ chrome.storage.sync.get('data', function(data) {
         wrapper.classList.add(stylePrefix + '_wrapper');
         wrapper.tabIndex=1;
         const wrapperContent = `
-            <a id="` + stylePrefix +`_close" href="#">X</a>
-            <qr-code data="` + lbl + `" id="` + stylePrefix +`_qrcode" format="svg"></qr-code>
-            <label id="` + stylePrefix +`_label">` + lbl +`</label>`;
+            <a id="${stylePrefix}_close" href="#">X</a>
+            <qr-code data="${lbl}" id="${stylePrefix}_qrcode" format="svg"></qr-code>
+            <label id="${stylePrefix}_label">` + lbl +`</label>
+            <p class="${stylePrefix}_copyright">
+                <a title="mail@damandeepsingh.com" href="mailto:mail@damandeepsingh.com">&copy; mail@damandeepsingh.com</a>
+            </p>`;
         wrapper.innerHTML = wrapperContent;
         document.body.insertBefore (wrapper, document.body.firstChild);
 
@@ -99,10 +121,14 @@ chrome.storage.sync.get('data', function(data) {
         wrapper.addEventListener('keydown', e=> {
             if(e.keyCode==27)
                 wrapper.style.display="none";
-        })
+            })
         document.body.setAttribute('qr-extension-ready', "yes");
 
         wrapper.focus();
+
+        wrapper.addEventListener('mouseover', e => {
+            wrapper.focus();
+        })
     } else {
         document.querySelector('#' + stylePrefix +  '_qrcode').setAttribute("data", lbl);
         document.querySelector('#' + stylePrefix +  '_label').innerHTML = lbl;
@@ -110,5 +136,5 @@ chrome.storage.sync.get('data', function(data) {
         wrapper.style.display = "inline-block";
         wrapper.focus();
     }
-
 });
+        
