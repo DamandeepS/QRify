@@ -705,12 +705,12 @@ var QRCode = {
 		var e = document.createElement('div');
 		var n = matrix.length;
 		var html = ['<table border="0" cellspacing="0" cellpadding="0" style="border:' +
-			modsize*margin + 'px solid #fff;background:#fff">'];
+			modsize*margin + 'px solid #fff;background:var(--bg-color, #FFF)">'];
 		for (var i = 0; i < n; ++i) {
 			html.push('<tr>');
 			for (var j = 0; j < n; ++j) {
 				html.push('<td style="width:' + modsize + 'px;height:' + modsize + 'px' +
-					(matrix[i][j] ? ';background:#000' : '') + '"></td>');
+					(matrix[i][j] ? ';background:var(--fg-color, #FFF)' : '') + '"></td>');
 			}
 			html.push('</tr>');
 		}
@@ -738,7 +738,7 @@ var QRCode = {
         }
 
 		var svg = [
-			'<style scoped>.bg{fill:#FFF}.fg{fill:#000}</style>',
+			'<style scoped>.bg{fill:var(--bg-color, #FFF)}.fg{fill:var(--fg-color, #000)}</style>',
 			'<rect class="bg" x="0" y="0"',
 			'width="'+size+'" height="'+size+'"/>',
 		];
