@@ -1,6 +1,7 @@
 (()=> {
-    
-QRCode = (() => {
+if (globalThis.QRCode) return;
+
+globalThis.QRCode = (() => {
 /* Quick overview: QR code composed of 2D array of modules (a rectangular
  * area that conveys one bit of information); some modules are fixed to help
  * the recognition of the code, and remaining data modules are further divided
@@ -727,7 +728,7 @@ var QRCode = {
 		var margin = Math.max(options.margin !== null ? options.margin : 4, 0.0);
 		var size = modsize * (n + 2 * margin);
 
-		var common = ' class= "fg"'+' width="'+modsize+'" height="'+modsize+'"/>';
+		var common = ' fill="#000"'+' width="'+modsize+'" height="'+modsize+'"/>';
 
 		var e = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		e.setAttribute('viewBox', '0 0 '+size+' '+size);
@@ -738,8 +739,7 @@ var QRCode = {
         }
 
 		var svg = [
-			'<style scoped>.bg{fill:#FFF}.fg{fill:#000}</style>',
-			'<rect class="bg" x="0" y="0"',
+			'<rect fill="#FFF" x="0" y="0"',
 			'width="'+size+'" height="'+size+'"/>',
 		];
 
@@ -897,6 +897,8 @@ class QRCodeElement extends HTMLElement {
     }
 }
 
-customElements.define('qr-code', QRCodeElement);
+if (globalThis.customElements && !customElements.get('qr-code')) {
+    customElements.define('qr-code', QRCodeElement);
+}
 
 })()

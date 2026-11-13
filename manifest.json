@@ -1,7 +1,7 @@
 {
   "name": "QRify",
-  "version": "0.1.7",
-  "manifest_version": 2,
+  "version": "0.1.8",
+  "manifest_version": 3,
   "short_name": "QRify",
   "description": "This extension allows you to create QR code for selected link/text, Enabling sharing URL/Text to other devices",
   "default_locale": "en",
@@ -11,12 +11,10 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "default_locale": "en",
   "background": {
-    "page": "src/bg/background.html",
-    "persistent": true
+    "service_worker": "src/bg/background.js"
   },
-  "page_action": {
+  "action": {
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -25,13 +23,10 @@
     "default_title": "QRify",
     "default_popup": "./src/page_action/page_action.html"
   },
-  "web_accessible_resources": ["js/qr-code.js","src/page_action/page_action.html"],
   "permissions": [
     "contextMenus",
-    "storage",
     "activeTab",
-    "tabs",
-    "declarativeContent"
+    "scripting"
   ],
   "offline_enabled": true,
   "author": "Damandeep Singh <mail@damandeepsingh.com>"

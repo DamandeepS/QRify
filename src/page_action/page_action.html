@@ -104,13 +104,13 @@
 			  to 	{ width:0; background:transparent; }
 			}
 		</style>
-		<script src="/js/qr.js"></script>
 		<script src="/js/qr-code.js"></script>
 	</head>
 	<body>
 		<div id="mainPopup">
 			<p>Select any text/link and right-click to generate QR.</p>
 			<qr-code id="qrCode"></qr-code>
+			<p id="error" role="alert" hidden></p>
 			<div class="group">
 	      <textarea type="text" id="input" rows="1" required></textarea>
 	      <span class="highlight"></span>
