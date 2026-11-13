@@ -7,6 +7,11 @@ This google chrome extension enable user to generate QR code for any selected te
 ## Technologies Used
 QRcode webcomponent - [https://github.com/educastellano/qr-code](https://github.com/educastellano/qr-code)
 
+## Privacy
+See the [QRify Privacy Policy](./privacy-policy.md) for local data processing,
+permissions, temporary retention, and the privacy implications of in-page
+overlays.
+
 ## Browser Compatibility
 QRify uses Manifest V3 for current Google Chrome. The background runs as an
 event-driven service worker, and the toolbar popup uses the `action` API.
@@ -74,6 +79,11 @@ Complete the single-purpose description and justifications for `contextMenus`,
 `activeTab`, and `scripting`, certify the data-use declarations, and verify the
 publisher contact email. Check the takedown notice for any additional violation
 before submitting for review.
+
+Commit and push the privacy policy to the public repository, then enter its
+public URL in the dashboard's **Privacy policy URL** field:
+https://github.com/DamandeepS/QRify/blob/master/privacy-policy.md.
+Verify the link opens without signing in before submitting.
 
 Full installation and real extension API integration still require testing in
 Chrome where unpacked extensions are permitted. Administrator policy blocked
