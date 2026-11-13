@@ -74,4 +74,5 @@ function showQRCode(data) {
   wrapper.shadowRoot.getElementById('label').textContent = data;
   wrapper.style.display = 'block';
   wrapper.focus();
+  return true;
 }

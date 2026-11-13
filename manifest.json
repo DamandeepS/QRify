@@ -1,6 +1,6 @@
 {
   "name": "QRify",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "manifest_version": 3,
   "short_name": "QRify",
   "description": "This extension allows you to create QR code for selected link/text, Enabling sharing URL/Text to other devices",

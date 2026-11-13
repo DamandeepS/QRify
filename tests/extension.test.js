@@ -8,7 +8,7 @@ const root = path.resolve(__dirname, '..');
 const source = file => fs.readFileSync(path.join(root, file), 'utf8');
 const plain = value => JSON.parse(JSON.stringify(value));
 
-function background(executeScript = async () => {}) {
+function background(executeScript = async () => [{frameId: 0, result: true}]) {
   const listeners = {};
   const menus = [];
   const injections = [];
@@ -54,7 +54,7 @@ test('service worker installs unique menus without recreating them on startup', 
 test('concurrent selections keep their own data and target the clicked tab', async () => {
   const pending = new Map();
   const app = background(injection => {
-    if (!injection.files) return Promise.resolve();
+    if (!injection.files) return Promise.resolve([{frameId: 0, result: true}]);
     return new Promise(resolve => { pending.set(injection.target.tabId, resolve); });
   });
   const first = app.listeners.clicked(
@@ -100,6 +100,21 @@ test('failed injection is reported instead of showing a successful result', asyn
   assert.deepEqual(app.badges, [{tabId: 4, text: 'ERR'}]);
   await app.listeners.clicked({menuItemId: 'qrify-page'}, undefined);
   assert.equal(app.errors.length, 2);
+});
+
+test('injected runtime failure is reported even when Chrome resolves the injection promise', async () => {
+  let renderSucceeded = false;
+  const app = background(async injection => {
+    if (injection.files) return [{frameId: 0}];
+    return renderSucceeded ? [{frameId: 0, result: true}] : [{frameId: 0}];
+  });
+  await app.listeners.clicked({menuItemId: 'qrify-page'}, {id: 5, url: 'https://example.com/'});
+  assert.equal(app.errors.length, 1);
+  assert.deepEqual(app.badges, [{tabId: 5, text: 'ERR'}]);
+  renderSucceeded = true;
+  await app.listeners.clicked({menuItemId: 'qrify-page'}, {id: 5, url: 'https://example.com/'});
+  assert.equal(app.errors.length, 1);
+  assert.deepEqual(app.badges, [{tabId: 5, text: 'ERR'}, {tabId: 5, text: ''}]);
 });
 
 function popup(tabs, lastError) {

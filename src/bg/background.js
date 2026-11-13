@@ -61,11 +61,14 @@ async function handleContextMenu(info, tab) {
       target,
       files: ['js/qr-code.js']
     });
-    await chrome.scripting.executeScript({
+    const results = await chrome.scripting.executeScript({
       target,
       func: showQRCode,
       args: [data]
     });
+    if (results[0]?.result !== true) {
+      throw new Error('The QR overlay did not finish rendering. Check the tab console for details.');
+    }
     await chrome.action.setBadgeText({tabId: tab.id, text: ''});
     await chrome.action.setTitle({tabId: tab.id, title: 'QRify'});
   } catch (error) {

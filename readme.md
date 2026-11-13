@@ -27,7 +27,10 @@ selected links are shortened by removing trailing URL segments until they fit
 mobile QR scanners struggle to read complex QR codes from lower PPI screens.
 
 ## How to Use
-### This extension is now published to Chrome Webstore - [link](https://chrome.google.com/webstore/detail/qrify/nnokneneaanlmkpcibflacfhhneijagl).
+### Chrome Web Store
+The [existing QRify listing](https://chrome.google.com/webstore/detail/qrify/nnokneneaanlmkpcibflacfhhneijagl)
+was taken down while using Manifest V2. Version **0.1.9** is the Manifest V3
+update intended for resubmission to that same listing.
 
 #### Alternatively you can add it via **Developer Mode**:
    - Download and extract the current repository source, or clone this repository. The old v0.1.7 release still uses Manifest V2.
@@ -47,6 +50,35 @@ Run the dependency-free regression tests with Node.js 18 or later:
 ```sh
 node --test tests/*.test.js
 ```
+
+### Packaging and updating the existing listing
+The store's legacy published and draft packages are both **0.1.8**. The
+extension's `version` must be higher than the latest store package; changing
+`manifest_version` from 2 to 3 does not increment the application version.
+Renaming a ZIP also does not change the manifest inside it.
+
+From the repository root, create a fresh archive containing the runtime files
+and license. Remove any existing archive for the same version before rebuilding:
+`zip` updates existing archives and can otherwise retain obsolete files.
+
+```sh
+version="$(node -p "require('./manifest.json').version")"
+zip -r "QRify-$version.zip" manifest.json LICENSE _locales icons inject js src -x '*.DS_Store'
+unzip -p "QRify-$version.zip" manifest.json
+```
+
+The manifest must be at the ZIP root. Upload **QRify-0.1.9.zip**, not the earlier
+0.1.8 archive, through **Package > Upload New Package** in the existing item's
+[Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+Complete the single-purpose description and justifications for `contextMenus`,
+`activeTab`, and `scripting`, certify the data-use declarations, and verify the
+publisher contact email. Check the takedown notice for any additional violation
+before submitting for review.
+
+Full installation and real extension API integration still require testing in
+Chrome where unpacked extensions are permitted. Administrator policy blocked
+that check in the development environment; browser rendering and mocked API
+regression tests are not a substitute for it.
 
 ### Demo
 ![Demo](QRify-demo-gh.gif)
